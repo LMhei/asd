@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main  # 或者你要监听的其他分支
+  pull_request:
+    branches:
+      - main  # 或者你要监听的其他分支
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # 选择运行环境
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'  # 或者你需要的其他版本
+
+      - name: Build with Maven
+        run: mvn clean install  # 如果你使用 Maven 构建项目
+
+      - name: Run tests
+        run: mvn test  # 运行测试
